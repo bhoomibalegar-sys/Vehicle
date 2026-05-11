@@ -245,6 +245,24 @@ function loadData() {
 
 // ADD
 function addVehicle() {
+
+    if (!vehicle.value.trim()) {
+        alert("Vehicle number is required");
+        return;
+    }
+
+    if (!fc.value || !insurance.value || !emission.value) {
+        alert("All date fields are required");
+        return;
+    }
+
+    let today = new Date();
+
+    if (new Date(fc.value) < today) {
+        alert("FC date cannot be in the past");
+        return;
+    }
+
     let data = {
         vehicle_number: vehicle.value,
         fc: fc.value,
@@ -278,8 +296,14 @@ function editVehicle(row) {
 
 // UPDATE
 function updateVehicle() {
+
     if (!edit_id.value) {
         alert("Select record first");
+        return;
+    }
+
+    if (!vehicle.value.trim()) {
+        alert("Vehicle number is required");
         return;
     }
 
